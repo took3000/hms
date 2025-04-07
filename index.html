@@ -252,37 +252,33 @@
     <!-- 顶部背景图 -->
     <img src="https://pic1.zhimg.com/80/v2-fef18e2b369a74333f1660ec2d18f55a.png" style="position: fixed; top: 0; left: 0; width: 100%; height: auto; z-index: -2; opacity: 0.8;">
 
-    <!-- 轻拟物风格双卡片 -->
+    <!-- 轻拟物风格三卡片容器 -->
     <div class="dual-card-container">
         <!-- 主域名卡片 -->
         <div class="neumorphic-card" id="primaryCard">
             <div class="url-status">
                 <span class="response-time" id="primaryResponseTime"></span>
                 <span class="status-badge status-ok" id="primaryStatus">✓ 状态检测中...</span>
-                
             </div>
             <div class="url-display" id="primaryUrl">获取中</div>
             <div class="copy-hint">点击卡片 复制网址</div>
         </div>
 
-        <!-- 备用域名卡片 -->
+        <!-- 备用域名卡片1 -->
         <div class="neumorphic-card" id="backupCard">
             <div class="url-status">
-                   <span class="response-time" id="backupResponseTime"></span>
+                <span class="response-time" id="backupResponseTime"></span>
                 <span class="status-badge status-ok" id="backupStatus">✓ 状态检测中...</span>
-             
             </div>
             <div class="url-display" id="backupUrl">获取中</div>
             <div class="copy-hint">点击卡片 复制网址</div>
         </div>
-   
 
- <!-- 备用域名卡片 -->
+        <!-- 备用域名卡片2 -->
         <div class="neumorphic-card" id="backupCard2">
             <div class="url-status">
-                   <span class="response-time" id="backupResponseTime2"></span>
+                <span class="response-time" id="backupResponseTime2"></span>
                 <span class="status-badge status-ok" id="backupStatus2">✓ 状态检测中...</span>
-             
             </div>
             <div class="url-display" id="backupUrl2">获取中</div>
             <div class="copy-hint">点击卡片 复制网址</div>
@@ -328,8 +324,8 @@
         // 域名配置（硬编码）
         const domains = {
             primary: "hm.224248.xyz",
-            backup: "hm2025.224248.xyz"
-             backup2: "hanm.224248.xyz"
+            backup: "hm2025.224248.xyz",
+            backup2: "hanm.224248.xyz"
         };
 
         // 初始化页面
@@ -342,7 +338,7 @@
             // 检测域名状态
             checkDomainStatus(domains.primary, 'primary');
             checkDomainStatus(domains.backup, 'backup');
-             checkDomainStatus(domains.backup2, 'backup2');
+            checkDomainStatus(domains.backup2, 'backup2');
             
             // 绑定复制事件
             setupCopyHandlers();
