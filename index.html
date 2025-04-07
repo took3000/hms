@@ -68,6 +68,7 @@
 
         @keyframes borderColorChange {
             0% { border-color: var(--color-1); }
+            20% { border-color: var(--color-1); }
             33% { border-color: var(--color-2); }
             66% { border-color: var(--color-3); }
             100% { border-color: var(--color-1); }
@@ -113,7 +114,7 @@
             padding: 12px;
             background: rgba(5, 46, 113, 0.05);
             border-radius: 8px;
-            border-left: 3px solid var(--accent-color);
+            border-top: 2px solid var(--accent-color);
         }
 
         .copy-hint {
@@ -259,7 +260,7 @@
                 <span class="status-badge status-ok" id="primaryStatus">✓ 状态检测中...</span>
                 <span class="response-time" id="primaryResponseTime"></span>
             </div>
-            <div class="url-display" id="primaryUrl">https://main.224248.xyz</div>
+            <div class="url-display" id="primaryUrl">获取中</div>
             <div class="copy-hint">点击卡片复制网址</div>
         </div>
 
@@ -269,7 +270,7 @@
                 <span class="status-badge status-ok" id="backupStatus">✓ 状态检测中...</span>
                 <span class="response-time" id="backupResponseTime"></span>
             </div>
-            <div class="url-display" id="backupUrl">https://reserve.224248.xyz</div>
+            <div class="url-display" id="backupUrl">获取中</div>
             <div class="copy-hint">点击卡片复制网址</div>
         </div>
     </div>
