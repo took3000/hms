@@ -277,10 +277,10 @@
         <!-- 备用域名卡片2 -->
         <div class="neumorphic-card" id="backupCard2">
             <div class="url-status">
-                <span class="response-time" id="backupResponseTime2"></span>
-                <span class="status-badge status-ok" id="backupStatus2">✓ 状态检测中...</span>
+                <span class="response-time" id="backup2ResponseTime"></span>
+                <span class="status-badge status-ok" id="backup2Status">✓ 状态检测中...</span>
             </div>
-            <div class="url-display" id="backupUrl2">获取中</div>
+            <div class="url-display" id="backup2Url">获取中</div>
             <div class="copy-hint">点击卡片 复制网址</div>
         </div>
     </div>
@@ -333,7 +333,7 @@
             // 硬编码设置网址显示
             document.getElementById('primaryUrl').textContent = `https://${domains.primary}`;
             document.getElementById('backupUrl').textContent = `https://${domains.backup}`;
-            document.getElementById('backupUrl2').textContent = `https://${domains.backup2}`;
+            document.getElementById('backup2Url').textContent = `https://${domains.backup2}`;
             
             // 检测域名状态
             checkDomainStatus(domains.primary, 'primary');
