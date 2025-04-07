@@ -30,7 +30,7 @@
             padding: 20px;
         }
 
-        /* 轻拟物风格双卡片容器 */
+        /* 轻拟物风格三卡片容器 */
         .dual-card-container {
             display: flex;
             flex-direction: column;
@@ -277,10 +277,10 @@
         <!-- 备用域名卡片2 -->
         <div class="neumorphic-card" id="backupCard2">
             <div class="url-status">
-                <span class="response-time" id="backup2ResponseTime"></span>
-                <span class="status-badge status-ok" id="backup2Status">✓ 状态检测中...</span>
+                <span class="response-time" id="backupResponseTime2"></span>
+                <span class="status-badge status-ok" id="backupStatus2">✓ 状态检测中...</span>
             </div>
-            <div class="url-display" id="backup2Url">获取中</div>
+            <div class="url-display" id="backupUrl2">获取中</div>
             <div class="copy-hint">点击卡片 复制网址</div>
         </div>
     </div>
@@ -333,7 +333,7 @@
             // 硬编码设置网址显示
             document.getElementById('primaryUrl').textContent = `https://${domains.primary}`;
             document.getElementById('backupUrl').textContent = `https://${domains.backup}`;
-            document.getElementById('backup2Url').textContent = `https://${domains.backup2}`;
+            document.getElementById('backupUrl2').textContent = `https://${domains.backup2}`;
             
             // 检测域名状态
             checkDomainStatus(domains.primary, 'primary');
@@ -344,33 +344,42 @@
             setupCopyHandlers();
         });
 
-        // 域名状态检测
+        // 域名状态检测（修正版）
         async function checkDomainStatus(domain, type) {
             const startTime = Date.now();
             const url = `https://${domain}/?healthcheck=1`;
-            const statusElement = document.getElementById(`${type}Status`);
-            const timeElement = document.getElementById(`${type}ResponseTime`);
+            
+            // 修正选择器 - 第三个卡片有特殊的ID后缀2
+            const statusElement = document.getElementById(`${type}Status${type === 'backup2' ? '2' : ''}`);
+            const timeElement = document.getElementById(`${type}ResponseTime${type === 'backup2' ? '2' : ''}`);
             
             try {
                 const response = await fetch(url, { 
                     method: 'HEAD',
                     mode: 'no-cors',
-                    cache: 'no-store'
+                    cache: 'no-store',
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
                 });
                 
                 const latency = Date.now() - startTime;
-                statusElement.textContent = `✓ 可用 (${latency}ms)`;
-                statusElement.className = "status-badge status-ok";
-                timeElement.textContent = latency < 500 ? "⚡️ 速度流畅" : "🐢 速度较慢";
-                
-                // 根据延迟优化卡片排序
-                if (latency < 500) {
-                    document.getElementById(`${type}Card`).style.order = -1;
+                if(statusElement) {
+                    statusElement.textContent = `✓ 可用 (${latency}ms)`;
+                    statusElement.className = "status-badge status-ok";
                 }
+                if(timeElement) {
+                    timeElement.textContent = latency < 500 ? "⚡️ 速度流畅" : "🐢 速度较慢";
+                }
+                
             } catch (error) {
-                statusElement.textContent = "✗ 检测失败";
-                statusElement.className = "status-badge status-fail";
-                timeElement.textContent = "💀 完蛋了";
+                if(statusElement) {
+                    statusElement.textContent = "✗ 检测失败";
+                    statusElement.className = "status-badge status-fail";
+                }
+                if(timeElement) {
+                    timeElement.textContent = "💀 完蛋了";
+                }
             }
         }
 
