@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>入口页</title>
+    <style>
+        :root {
+            --background-color: #f3f5f8;
+            --item-background: linear-gradient(180deg, #f3f5f8, #fff);
+            --text-primary: #2a2f36;
+            --text-secondary: #6c7a89;
+            --accent-color: #052e71;
+            --success-color: #07C160;
+            --warning-red: #DB2828;
+            --color-1: #fff;
+            --color-2: #f0f;
+            --color-3: #0ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--background-color);
+            padding: 20px;
+        }
+
+        /* 轻拟物风格双卡片容器 */
+        .dual-card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+
+        /* 轻拟物卡片 */
+        .neumorphic-card {
+            background: var(--item-background);
+            border: 2px solid #fff;
+            border-radius: 12px;
+            box-shadow: 8px 8px 20px rgba(55, 99, 170, 0.1),
+                       -8px -8px 20px #fff;
+            padding: 25px;
+            transition: all 0.3s ease-out;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .neumorphic-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            z-index: -1;
+            animation: borderColorChange 6s ease infinite;
+        }
+
+        @keyframes borderColorChange {
+            0% { border-color: var(--color-1); }
+            33% { border-color: var(--color-2); }
+            66% { border-color: var(--color-3); }
+            100% { border-color: var(--color-1); }
+        }
+
+        .url-status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            background: rgba(5, 46, 113, 0.1);
+            color: var(--accent-color);
+        }
+
+        .status-ok {
+            background: rgba(7, 193, 96, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-fail {
+            background: rgba(219, 40, 40, 0.1);
+            color: var(--warning-red);
+        }
+
+        .response-time {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .url-display {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-color);
+            word-break: break-all;
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(5, 46, 113, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .copy-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* 广告卡片 */
+        .new-card {
+            background: #fff;
+            border: 2px solid #fff;
+            border-radius: 12px;
+            box-shadow: 8px 8px 20px rgba(55, 99, 170, 0.1),
+                       -8px -8px 20px #fff;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease-out;
+            padding: 20px;
+            display: block;
+            margin: 0 auto 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .new-card::after {
+            content: "广告位";
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            background-color:#212121;
+            color: #FFF;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 10px;
+        }
+
+        .new-card .text-container {
+            margin-bottom: 20px;
+        }
+
+        .new-card .small-text {
+            font-size: 16px;
+            color: var(--accent-color); 
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .new-card .image-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .new-card .image-container img {
+            width: 94%;
+            height: auto;
+            border-radius: 24px;
+            opacity: 0.8;
+        }
+
+        .new-card .image-container div {
+            width: 48%;
+            height: auto;
+        }
+
+        .new-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* 页脚 */
+        .footer {
+            display: flex;
+            height: 100px;
+            padding: 0 10px;
+            background-color: #fff;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 9999;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: var(--accent-color);
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .footer .warning-text {
+            color: var(--warning-red);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .footer img {
+            max-height: 68px;
+            width: auto;
+        }
+
+        /* 动效 */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .copied-effect {
+            animation: pulse 0.5s ease;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .neumorphic-card {
+                padding: 20px;
+            }
+            .url-display {
+                font-size: 16px;
+            }
+            .new-card {
+                margin-bottom: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部背景图 -->
+    <img src="https://pic1.zhimg.com/80/v2-fef18e2b369a74333f1660ec2d18f55a.png" style="position: fixed; top: 0; left: 0; width: 100%; height: auto; z-index: -2; opacity: 0.8;">
+
+    <!-- 轻拟物风格双卡片 -->
+    <div class="dual-card-container">
+        <!-- 主域名卡片 -->
+        <div class="neumorphic-card" id="primaryCard">
+            <div class="url-status">
+                <span class="status-badge status-ok" id="primaryStatus">✓ 状态检测中...</span>
+                <span class="response-time" id="primaryResponseTime"></span>
+            </div>
+            <div class="url-display" id="primaryUrl">https://main.224248.xyz</div>
+            <div class="copy-hint">点击卡片复制网址</div>
+        </div>
+
+        <!-- 备用域名卡片 -->
+        <div class="neumorphic-card" id="backupCard">
+            <div class="url-status">
+                <span class="status-badge status-ok" id="backupStatus">✓ 状态检测中...</span>
+                <span class="response-time" id="backupResponseTime"></span>
+            </div>
+            <div class="url-display" id="backupUrl">https://reserve.224248.xyz</div>
+            <div class="copy-hint">点击卡片复制网址</div>
+        </div>
+    </div>
+
+    <!-- 广告卡片 -->
+    <div class="new-card">
+        <div class="text-container">
+            <div class="small-text">所谓饱暖思吟欲，不如点个外卖先</div>
+            <p>怦然心动与人间烟火，你们皆可托付于我</p>
+        </div>
+        <div class="image-container">
+            <div> 
+                <img src="https://picx.zhimg.com/80/v2-1642722baaa7448b25b2dcf3e27f5375_720w.jpeg">
+                <p>🍚</p>
+                <p>超大额优惠上新</p>
+                <p>长按图片扫码领取</p>
+                <br>
+            </div>          
+            <div>   
+                <img src="https://pic1.zhimg.com/80/v2-c911cbbb3f316a30ee539e948aedcf70_720w.png">
+                <img src="https://picx.zhimg.com/80/v2-43c7d33f5945835c32cb0afa6b426071_720w.png">
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <div>
+            <div class="footer-text warning-text">建议截图本页以免迷失</div>
+            <div class="footer-text">如果入口页失效</div>
+            <div class="footer-text">可前往公众号回复【最新】获取</div>
+        </div>
+        <div>
+            <img src="https://pica.zhimg.com/80/v2-c5b3cade1cf48e0549d8ca86e44fe157_720w.jpeg" alt="公众号二维码">
+        </div>
+    </div>
+
+    <script>
+        // 域名配置（硬编码）
+        const domains = {
+            primary: "main.224248.xyz",
+            backup: "reserve.224248.xyz"
+        };
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 硬编码设置网址显示
+            document.getElementById('primaryUrl').textContent = `https://${domains.primary}`;
+            document.getElementById('backupUrl').textContent = `https://${domains.backup}`;
+            
+            // 检测域名状态
+            checkDomainStatus(domains.primary, 'primary');
+            checkDomainStatus(domains.backup, 'backup');
+            
+            // 绑定复制事件
+            setupCopyHandlers();
+        });
+
+        // 域名状态检测
+        async function checkDomainStatus(domain, type) {
+            const startTime = Date.now();
+            const url = `https://${domain}/?healthcheck=1`;
+            const statusElement = document.getElementById(`${type}Status`);
+            const timeElement = document.getElementById(`${type}ResponseTime`);
+            
+            try {
+                const response = await fetch(url, { 
+                    method: 'HEAD',
+                    mode: 'no-cors',
+                    cache: 'no-store'
+                });
+                
+                const latency = Date.now() - startTime;
+                statusElement.textContent = `✓ 可用 (${latency}ms)`;
+                statusElement.className = "status-badge status-ok";
+                timeElement.textContent = latency < 500 ? "⚡️ 速度流畅" : "🐢 速度较慢";
+                
+                // 根据延迟优化卡片排序
+                if (latency < 500) {
+                    document.getElementById(`${type}Card`).style.order = -1;
+                }
+            } catch (error) {
+                statusElement.textContent = "✗ 检测失败";
+                statusElement.className = "status-badge status-fail";
+                timeElement.textContent = "建议使用备用网址";
+            }
+        }
+
+        // 复制功能设置
+        function setupCopyHandlers() {
+            const cards = document.querySelectorAll('.neumorphic-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', async function() {
+                    const url = this.querySelector('.url-display').textContent;
+                    
+                    try {
+                        await navigator.clipboard.writeText(url);
+                        showCopyFeedback(this);
+                    } catch (err) {
+                        copyToClipboardFallback(url);
+                        showCopyFeedback(this);
+                    }
+                });
+            });
+        }
+
+        // 备用复制方法
+        function copyToClipboardFallback(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+
+        // 复制反馈效果
+        function showCopyFeedback(element) {
+            element.classList.add('copied-effect');
+            setTimeout(() => {
+                element.classList.remove('copied-effect');
+            }, 500);
+            
+            // 显示浮动提示
+            const toast = document.createElement('div');
+            toast.textContent = '✓ 网址已复制';
+            toast.style.position = 'fixed';
+            toast.style.bottom = '120px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'rgba(0,0,0,0.8)';
+            toast.style.color = 'white';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '20px';
+            toast.style.zIndex = '1000';
+            toast.style.fontSize = '14px';
+            toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
