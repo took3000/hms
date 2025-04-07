@@ -114,7 +114,6 @@
             padding: 12px;
             background: rgba(5, 46, 113, 0.05);
             border-radius: 8px;
-            border-top: 2px solid var(--accent-color);
         }
 
         .copy-hint {
@@ -261,7 +260,7 @@
                 <span class="response-time" id="primaryResponseTime"></span>
             </div>
             <div class="url-display" id="primaryUrl">获取中</div>
-            <div class="copy-hint">点击卡片复制网址</div>
+            <div class="copy-hint">点击卡片 复制网址</div>
         </div>
 
         <!-- 备用域名卡片 -->
@@ -271,7 +270,7 @@
                 <span class="response-time" id="backupResponseTime"></span>
             </div>
             <div class="url-display" id="backupUrl">获取中</div>
-            <div class="copy-hint">点击卡片复制网址</div>
+            <div class="copy-hint">点击卡片 复制网址</div>
         </div>
     </div>
 
@@ -357,7 +356,7 @@
             } catch (error) {
                 statusElement.textContent = "✗ 检测失败";
                 statusElement.className = "status-badge status-fail";
-                timeElement.textContent = "建议使用备用网址";
+                timeElement.textContent = "完蛋了";
             }
         }
 
@@ -400,7 +399,7 @@
             
             // 显示浮动提示
             const toast = document.createElement('div');
-            toast.textContent = '✓ 网址已复制';
+            toast.textContent = '✓ 网址已复制，请到浏览器粘贴访问';
             toast.style.position = 'fixed';
             toast.style.bottom = '120px';
             toast.style.left = '50%';
