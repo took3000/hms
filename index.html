@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>多入口检测页</title>
+    <title>入口页</title>
     <style>
         :root {
             --background-color: #f3f5f8;
@@ -30,7 +30,8 @@
             padding: 20px;
         }
 
-        .multi-card-container {
+        /* 轻拟物风格双卡片容器 */
+        .dual-card-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -38,6 +39,7 @@
             margin: 30px auto;
         }
 
+        /* 轻拟物卡片 */
         .neumorphic-card {
             background: var(--item-background);
             border: 2px solid #fff;
@@ -66,7 +68,7 @@
 
         @keyframes borderColorChange {
             0% { border-color: var(--color-1); }
-            30% { border-color: var(--color-1); }
+           30% { border-color: var(--color-1); }
             45% { border-color: var(--color-2); }
             65% { border-color: var(--color-3); }
             70% { border-color: var(--color-1); }
@@ -122,6 +124,7 @@
             margin-top: 10px;
         }
 
+        /* 广告卡片 */
         .new-card {
             background: #fff;
             border: 2px solid #fff;
@@ -185,6 +188,7 @@
             margin-top: 4px;
         }
 
+        /* 页脚 */
         .footer {
             display: flex;
             height: 100px;
@@ -219,6 +223,7 @@
             width: auto;
         }
 
+        /* 动效 */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.03); }
@@ -229,6 +234,7 @@
             animation: pulse 0.5s ease;
         }
 
+        /* 响应式设计 */
         @media (max-width: 600px) {
             .neumorphic-card {
                 padding: 20px;
@@ -243,46 +249,35 @@
     </style>
 </head>
 <body>
+    <!-- 顶部背景图 -->
     <img src="https://pic1.zhimg.com/80/v2-fef18e2b369a74333f1660ec2d18f55a.png" style="position: fixed; top: 0; left: 0; width: 100%; height: auto; z-index: -2; opacity: 0.8;">
 
-    <div class="multi-card-container">
-        <div class="neumorphic-card" id="siteCard1">
+    <!-- 轻拟物风格双卡片 -->
+    <div class="dual-card-container">
+        <!-- 主域名卡片 -->
+        <div class="neumorphic-card" id="primaryCard">
             <div class="url-status">
-                <span class="response-time" id="responseTime1"></span>
-                <span class="status-badge status-ok" id="status1">✓ 检测中...</span>
+                <span class="response-time" id="primaryResponseTime"></span>
+                <span class="status-badge status-ok" id="primaryStatus">✓ 状态检测中...</span>
+                
             </div>
-            <div class="url-display" id="url1">获取中</div>
-            <div class="copy-hint">点击卡片复制网址</div>
+            <div class="url-display" id="primaryUrl">获取中</div>
+            <div class="copy-hint">点击卡片 复制临时网址 粘贴到浏览器访问</div>
         </div>
 
-        <div class="neumorphic-card" id="siteCard2">
+        <!-- 备用域名卡片 -->
+        <div class="neumorphic-card" id="backupCard">
             <div class="url-status">
-                <span class="response-time" id="responseTime2"></span>
-                <span class="status-badge status-ok" id="status2">✓ 检测中...</span>
+                   <span class="response-time" id="backupResponseTime"></span>
+                <span class="status-badge status-ok" id="backupStatus">✓ 状态检测中...</span>
+             
             </div>
-            <div class="url-display" id="url2">获取中</div>
-            <div class="copy-hint">点击卡片复制网址</div>
-        </div>
-
-        <div class="neumorphic-card" id="siteCard3">
-            <div class="url-status">
-                <span class="response-time" id="responseTime3"></span>
-                <span class="status-badge status-ok" id="status3">✓ 检测中...</span>
-            </div>
-            <div class="url-display" id="url3">获取中</div>
-            <div class="copy-hint">点击卡片复制网址</div>
-        </div>
-
-        <div class="neumorphic-card" id="siteCard4">
-            <div class="url-status">
-                <span class="response-time" id="responseTime4"></span>
-                <span class="status-badge status-ok" id="status4">✓ 检测中...</span>
-            </div>
-            <div class="url-display" id="url4">获取中</div>
-            <div class="copy-hint">点击卡片复制网址</div>
+            <div class="url-display" id="backupUrl">获取中</div>
+            <div class="copy-hint">点击卡片 复制临时网址 粘贴到浏览器访问</div>
         </div>
     </div>
 
+    <!-- 广告卡片 -->
     <div class="new-card">
         <div class="text-container">
             <div class="small-text">阿涵的好物架</div>
@@ -300,10 +295,13 @@
                 <img src="https://gd-hbimg.huaban.com/b8b3a598c1b613a78ca1b6b0ccee3d01f80b70c51414f-NjVaks" referrerpolicy="no-referrer">
                 <img src="https://gd-hbimg.huaban.com/cf4dd1d8c37393556225c7fd5aade2ee27a08eee19e86-3yEMKM" referrerpolicy="no-referrer">
                 <img src="https://gd-hbimg.huaban.com/b3f6de08599eac31958d8bb6f68d76d614e0db9d1af40-dsC0BG" referrerpolicy="no-referrer">
+
+              
             </div>
         </div>
     </div>
 
+    <!-- 页脚 -->
     <div class="footer">
         <div>
             <div class="footer-text warning-text">建议截图本页以免迷失</div>
@@ -316,62 +314,54 @@
     </div>
 
     <script>
-        // 配置您的4个网站域名（请替换为实际域名）
-        const sites = [
-            { id: 1, url: "newhm.hmzxwz.cn", name: "主站1" },
-            { id: 2, url: "hanmanzx.224248.xyz", name: "主站2" },
-            { id: 3, url: "han666.666516.xyz", name: "备用1" },
-            { id: 4, url: "hm.224248.xyz", name: "备用2" }
-        ];
+        // 域名配置（硬编码）
+        const domains = {
+            primary: "newhm.hmzxwz.cn",
+            backup: "hanmanzx.224248.xyz"
+        };
 
         // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
-            // 设置网址显示
-            sites.forEach(site => {
-                document.getElementById(`url${site.id}`).textContent = `https://${site.url}`;
-                checkSiteStatus(site);
-            });
+            // 硬编码设置网址显示
+            document.getElementById('primaryUrl').textContent = `https://${domains.primary}`;
+            document.getElementById('backupUrl').textContent = `https://${domains.backup}`;
+            
+            // 检测域名状态
+            checkDomainStatus(domains.primary, 'primary');
+            checkDomainStatus(domains.backup, 'backup');
             
             // 绑定复制事件
             setupCopyHandlers();
         });
 
-        // 网站状态检测（使用图片加载方式绕过CORS限制）
-        function checkSiteStatus(site) {
+        // 域名状态检测
+        async function checkDomainStatus(domain, type) {
             const startTime = Date.now();
-            const img = new Image();
-            const statusElement = document.getElementById(`status${site.id}`);
-            const timeElement = document.getElementById(`responseTime${site.id}`);
+            const url = `https://${domain}/?healthcheck=1`;
+            const statusElement = document.getElementById(`${type}Status`);
+            const timeElement = document.getElementById(`${type}ResponseTime`);
             
-            // 设置超时时间（5秒）
-            const timeout = setTimeout(() => {
-                statusElement.textContent = "✗ 请求超时";
-                statusElement.className = "status-badge status-fail";
-                timeElement.textContent = "💀 检测失败";
-            }, 5000);
-
-            img.onload = function() {
-                clearTimeout(timeout);
+            try {
+                const response = await fetch(url, { 
+                    method: 'HEAD',
+                    mode: 'no-cors',
+                    cache: 'no-store'
+                });
+                
                 const latency = Date.now() - startTime;
                 statusElement.textContent = `✓ 可用 (${latency}ms)`;
                 statusElement.className = "status-badge status-ok";
-                timeElement.textContent = latency < 500 ? "⚡️ 速度流畅" : latency < 1500 ? "🐢 速度一般" : "🐌 速度较慢";
+                timeElement.textContent = latency < 500 ? "⚡️ 速度流畅" : "🐢 速度较慢";
                 
                 // 根据延迟优化卡片排序
                 if (latency < 500) {
-                    document.getElementById(`siteCard${site.id}`).style.order = -1;
+                    document.getElementById(`${type}Card`).style.order = -1;
                 }
-            };
-
-            img.onerror = function() {
-                clearTimeout(timeout);
+            } catch (error) {
                 statusElement.textContent = "✗ 检测失败";
                 statusElement.className = "status-badge status-fail";
-                timeElement.textContent = "💀 无法访问";
-            };
-
-            // 使用随机参数避免缓存
-            img.src = `https://${site.url}/?healthcheck=${Date.now()}`;
+                timeElement.textContent = "💀 完蛋了";
+            }
         }
 
         // 复制功能设置
@@ -431,13 +421,6 @@
                 document.body.removeChild(toast);
             }, 1500);
         }
-
-        // 每30秒自动检测一次状态
-        setInterval(() => {
-            sites.forEach(site => {
-                checkSiteStatus(site);
-            });
-        }, 30000);
     </script>
 </body>
 </html>
